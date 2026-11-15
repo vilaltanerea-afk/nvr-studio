@@ -622,7 +622,7 @@
   /* ---------- Detalles de movimiento ---------- */
   .ficha:active .placa{transform:translateY(-1px) scale(.97); transition-duration:.12s;}
   .js .rail img, .js .gp img{opacity:0; transition:opacity .45s ease, transform .8s var(--ease);}
-  .js .rail img.ok, .js .gp img.ok{opacity:1;}
+  .js .rail img.cargada, .js .gp img.cargada{opacity:1;}
   @media (hover:none){
     .chooser a:hover img, .gp:hover img, .rail button:hover img, .ficha:hover .placa, .arriba:hover, .tela:hover{transform:none;}
   }
@@ -1540,8 +1540,8 @@ pintarColores();
 vigilarSecciones();
 /* Las fotos aparecen con un fundido suave al cargar, en vez de de golpe */
 document.querySelectorAll(".rail img, .gp img").forEach(img => {
-  if(img.complete && img.naturalWidth) img.classList.add("ok");
-  else { const ok = () => img.classList.add("ok"); img.addEventListener("load", ok, {once:true}); img.addEventListener("error", ok, {once:true}); }
+  if(img.complete && img.naturalWidth) img.classList.add("cargada");
+  else { const ok = () => img.classList.add("cargada"); img.addEventListener("load", ok, {once:true}); img.addEventListener("error", ok, {once:true}); }
 });
 /* Al tocar el nombre, el cuenco se gira para enseñar la placa */
 $("#texto").addEventListener("focus", () => { if(c3d && eleccion && eleccion.prod.id==="cuencos" && c3d.mirandoDeLado()) c3d.verDeFrente(); });
