@@ -11,6 +11,141 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="NVR Studio">
 <meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://nvilaltastudio.com/">
+<!-- Vista previa al compartir el enlace (WhatsApp, Instagram, Facebook…) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NVR Studio">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://nvilaltastudio.com/">
+<meta property="og:title" content="NVR Studio · Diseño e impresión 3D personalizada">
+<meta property="og:description" content="Cuencos para mascotas, lightbox, letras bubble y llaveros impresos en 3D con tu nombre y tus colores. Envíos a toda España.">
+<meta property="og:image" content="https://nvilaltastudio.com/imagenes/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cuencos personalizados de NVR Studio con nombres de mascotas">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Datos para Google -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "OnlineStore",
+ "name": "NVR Studio",
+ "url": "https://nvilaltastudio.com/",
+ "logo": "https://nvilaltastudio.com/imagenes/logo.png",
+ "image": "https://nvilaltastudio.com/imagenes/og.jpg",
+ "description": "Diseño e impresión 3D personalizada: cuencos para mascotas, lightbox, letras bubble, llaveros y más, con tu nombre y tus colores.",
+ "sameAs": [
+  "https://www.instagram.com/nvilalta.studio/"
+ ],
+ "address": {
+  "@type": "PostalAddress",
+  "addressLocality": "Terrassa",
+  "addressRegion": "Barcelona",
+  "addressCountry": "ES"
+ },
+ "areaServed": "ES",
+ "currenciesAccepted": "EUR",
+ "paymentAccepted": "Bizum, efectivo",
+ "hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": "Piezas impresas en 3D personalizadas",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "price": "20",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "itemOffered": {
+     "@type": "Product",
+     "name": "Cuenco personalizado",
+     "image": "https://nvilaltastudio.com/imagenes/cuenco-0.webp",
+     "brand": {
+      "@type": "Brand",
+      "name": "NVR Studio"
+     }
+    }
+   },
+   {
+    "@type": "Offer",
+    "price": "35",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "itemOffered": {
+     "@type": "Product",
+     "name": "Lightbox personalizado",
+     "image": "https://nvilaltastudio.com/imagenes/lightbox-0.webp",
+     "brand": {
+      "@type": "Brand",
+      "name": "NVR Studio"
+     }
+    }
+   },
+   {
+    "@type": "Offer",
+    "price": "7",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "itemOffered": {
+     "@type": "Product",
+     "name": "Letras bubble (precio por letra)",
+     "image": "https://nvilaltastudio.com/imagenes/bubble-0.webp",
+     "brand": {
+      "@type": "Brand",
+      "name": "NVR Studio"
+     }
+    }
+   },
+   {
+    "@type": "Offer",
+    "price": "20",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "itemOffered": {
+     "@type": "Product",
+     "name": "Soporte de portátil",
+     "image": "https://nvilaltastudio.com/imagenes/portatil-0.webp",
+     "brand": {
+      "@type": "Brand",
+      "name": "NVR Studio"
+     }
+    }
+   },
+   {
+    "@type": "Offer",
+    "price": "7",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "itemOffered": {
+     "@type": "Product",
+     "name": "Llaveros personalizados",
+     "image": "https://nvilaltastudio.com/imagenes/llavero-0.webp",
+     "brand": {
+      "@type": "Brand",
+      "name": "NVR Studio"
+     }
+    }
+   },
+   {
+    "@type": "Offer",
+    "price": "20",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "itemOffered": {
+     "@type": "Product",
+     "name": "Soporte de vinilos",
+     "image": "https://nvilaltastudio.com/imagenes/vinilos-0.webp",
+     "brand": {
+      "@type": "Brand",
+      "name": "NVR Studio"
+     }
+    }
+   }
+  ]
+ }
+}
+</script>
+<!-- Estadísticas sin cookies (GoatCounter) -->
+<script data-goatcounter="https://nvilaltastudio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <style>
   :root{
     --bg:#ffffff;
@@ -442,6 +577,12 @@
   .opt{border-radius:2px !important;}
   input, textarea{border-radius:2px;}
   .arriba{background:var(--ink); box-shadow:0 8px 22px rgba(0,0,0,.25);}
+  /* Casilla de privacidad y enlaces del pie */
+  .acepto{display:flex; gap:12px; align-items:flex-start; font-size:15px; line-height:1.4; cursor:pointer;}
+  .acepto input{width:20px; height:20px; flex:none; margin:1px 0 0; padding:0; accent-color:var(--ink); background:none; border:0; box-shadow:none; cursor:pointer;}
+  .acepto a{color:var(--ink); text-decoration:underline; text-underline-offset:3px;}
+  .foot-links{white-space:nowrap;}
+  @media (max-width:740px){ .arriba{width:44px; height:44px; opacity:.9;} }
 </style>
 </head>
 <body>
@@ -493,11 +634,11 @@
     <div class="wrap">
       <h2>Así de fácil.</h2>
       <ol class="steps">
-        <li><div class="k">1</div><h3>Elige tu pieza</h3><p>Desliza las fotos y pulsa «Personalizar» en la que más te guste.</p></li>
+        <li><div class="k">1</div><h3>Elige tu pieza</h3><p>Mira las fotos y pulsa «Personalizar» en la que más te guste.</p></li>
         <li><div class="k">2</div><h3>Hazla tuya</h3><p>Elige los colores, escribe el nombre o el texto y cuéntame cualquier detalle.</p></li>
         <li><div class="k">3</div><h3>Finaliza tu pedido</h3><p>Recibirás tu número de pedido al momento. Puedes pagar por Bizum al instante. Envío 6 €, gratis en pedidos de más de 50 €.</p></li>
       </ol>
-      <p class="note">Cada pieza se diseña e imprime bajo pedido, así que lleva su tiempo de preparación. Te confirmaré el precio final y el plazo antes de empezar. Los colores en pantalla pueden variar un poco respecto al filamento real.</p>
+      <p class="note">Cada pieza se diseña e imprime bajo pedido, así que lleva su tiempo de preparación: te diré el plazo al confirmar tu pedido. En las piezas que hago a partir de tu foto, te enviaré el diseño para que lo apruebes antes de imprimirlo. Los colores en pantalla pueden variar un poco respecto al filamento real.</p>
     </div>
   </section>
 </main>
@@ -506,7 +647,7 @@
   <div class="wrap foot">
     <img class="logo" src="imagenes/logo.png" alt="NVR Studio">
     <span>Diseño e impresión 3D personalizada. Envíos por toda España.</span>
-    <a href="https://www.instagram.com/nvilalta.studio/" target="_blank" rel="noopener">@nvilalta.studio en Instagram</a>
+    <span class="foot-links"><a href="https://www.instagram.com/nvilalta.studio/" target="_blank" rel="noopener">@nvilalta.studio en Instagram</a> · <a href="privacidad.html">Privacidad</a></span>
   </div>
 </footer>
 
@@ -1138,6 +1279,10 @@ function pintarCesta(){
         <label class="label" for="fNotas">Algo más <span class="opcional">(opcional)</span></label>
         <textarea id="fNotas" placeholder="Para cuándo lo necesitas, si es un regalo…"></textarea>
       </div>
+      <div>
+        <label class="acepto"><input type="checkbox" id="fAcepto"><span>He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
+        <div class="err" id="eAcepto">Para hacer el pedido tienes que aceptar la política de privacidad.</div>
+      </div>
       <div class="err" id="eEnvio"></div>
       <button class="pill block" type="submit" id="enviar">Finalizar pedido</button>
       <p class="small">Al finalizar recibirás tu número de pedido. Si pagas por Bizum, verás el número y el importe para hacerlo al momento.</p>
@@ -1149,6 +1294,7 @@ function pintarCesta(){
   body.querySelectorAll('input[name="entrega"]').forEach(r=>r.addEventListener("change",dir)); dir();
   [["fNombre","eNombre"],["fApellidos","eApellidos"],["fTel","eTel"],["fIg","eIg"],["fCalle","eCalle"],["fCP","eCP"],["fPob","ePob"]].forEach(([f,e])=>$("#"+f).addEventListener("input", ()=>$("#"+e).classList.remove("show")));
   $("#form").addEventListener("submit", enviar);
+  $("#fAcepto").addEventListener("change", ()=>$("#eAcepto").classList.remove("show"));
 }
 function pintarTotales(entrega){
   const box=$("#totales"); if(!box) return;
@@ -1265,6 +1411,7 @@ async function enviar(e){
     marca(/^\d{5}$/.test(c.cp), "fCP","eCP");
     marca(c.poblacion, "fPob","ePob");
   }
+  marca($("#fAcepto").checked, "fAcepto","eAcepto");
   if(fallos.length){ $("#"+fallos[0]).focus(); $("#"+fallos[0]).scrollIntoView({behavior:"smooth", block:"center"}); return; }
   c.direccion = c.entrega==="Envío" ? [c.calle, c.piso, `${c.cp} ${c.poblacion}`].filter(Boolean).join(", ") : "";
   const subtotalPedido = cesta.reduce((s,it)=>s+(+it.precio||0),0);
