@@ -362,6 +362,19 @@
   .sel{width:100%; appearance:none; -webkit-appearance:none; font:inherit; font-size:16px; color:var(--ink); background:#fff; border:1px solid #c7c7cc; border-radius:2px; padding:15px 44px 15px 16px; cursor:pointer;}
   .sel:focus{outline:none; border-color:var(--ink); box-shadow:0 0 0 3px rgba(0,0,0,.08);}
 
+  .totales{display:flex; flex-direction:column; gap:6px;}
+  .t-linea{display:flex; justify-content:space-between; font-size:15px; color:var(--ink-2);}
+  .t-linea[hidden]{display:none;}
+  .gratis{color:#1a7f37; font-weight:600;}
+  .t-nota{font-size:13px; color:var(--ink-2); margin:2px 0 0;}
+  .t-nota:empty{display:none;}
+  .bizum{background:var(--mist); border-radius:4px; padding:16px 18px; margin:14px 0 4px; text-align:left;}
+  .bizum b.n{font-size:22px; letter-spacing:.04em; display:block; margin:4px 0;}
+  .bizum .acciones{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+  .rp-item span:last-child{white-space:nowrap;}
+  #enviarWa{margin-top:10px;}
+  .pill.wa{background:#25D366; color:#fff; border-color:#25D366;}
+
   /* ================= Variante «cuadrícula» (estilo boutique) ================= */
   :root{--r-xl:0px; --r-lg:0px; --r-md:2px;}
   body{letter-spacing:.005em;}
@@ -482,7 +495,7 @@
       <ol class="steps">
         <li><div class="k">1</div><h3>Elige tu pieza</h3><p>Desliza las fotos y pulsa «Personalizar» en la que más te guste.</p></li>
         <li><div class="k">2</div><h3>Hazla tuya</h3><p>Elige los colores, escribe el nombre o el texto y cuéntame cualquier detalle.</p></li>
-        <li><div class="k">3</div><h3>Finaliza tu pedido</h3><p>Recibirás tu número de pedido al momento. No pagas nada ahora: te contacto para el pago.</p></li>
+        <li><div class="k">3</div><h3>Finaliza tu pedido</h3><p>Recibirás tu número de pedido al momento. Puedes pagar por Bizum al instante. Envío 6 €, gratis en pedidos de más de 50 €.</p></li>
       </ol>
       <p class="note">Cada pieza se diseña e imprime bajo pedido, así que lleva su tiempo de preparación. Te confirmaré el precio final y el plazo antes de empezar. Los colores en pantalla pueden variar un poco respecto al filamento real.</p>
     </div>
@@ -601,6 +614,10 @@
 const SUPABASE_URL  = "https://lvugkubtqggbueievrcd.supabase.co";
 const SUPABASE_KEY  = "sb_publishable_xgOOygHz3Owo4TUvY_Mw1Q_TaoQRYJz";
 const INSTAGRAM = "nvilalta.studio";
+const TEL_BIZUM = "697692299";
+const TEL_BIZUM_TXT = "697 692 299";
+const ENVIO = 6, ENVIO_GRATIS_MAS_DE = 50;
+const gastosEnvio = (subtotal, entrega) => entrega==="Envío" ? (subtotal > ENVIO_GRATIS_MAS_DE ? 0 : ENVIO) : 0;
 
 /* ===== Colores de filamento (en el orden del muestrario) ===== */
 const COLORES = [
@@ -1045,7 +1062,12 @@ function pintarCesta(){
           </div>
           <div style="text-align:right"><div>${it.precio!=null?euros(it.precio):"<small>A confirmar</small>"}</div><button class="edit" type="button" data-edit="${k}" aria-label="Cambiar ${esc(it.producto)}">Cambiar</button><button class="rm" type="button" data-rm="${k}" aria-label="Quitar ${esc(it.producto)}">Quitar</button></div>
         </div>`).join("")}
-      <div class="total"><span>Precio</span><span>${total?euros(total)+(conConsulta?" + ":""):""}${conConsulta?"te lo confirmo yo":""}</span></div>
+      <div class="totales" id="totales" data-sub="${total}">
+        <div class="t-linea"><span>Productos</span><span>${euros(total)}</span></div>
+        <div class="t-linea" id="tEnvio"><span>Envío</span><span></span></div>
+        <div class="total"><span>Total</span><span id="tTotal"></span></div>
+        <p class="t-nota" id="tNota"></p>
+      </div>
       <button class="pill soft" type="button" id="seguir">Añadir otra pieza</button>
     </div>
     <form id="form" novalidate style="display:flex;flex-direction:column;gap:26px">
@@ -1106,9 +1128,9 @@ function pintarCesta(){
         </div>
       </div>
       <div>
-        <h4 class="q" id="lPago">Pago. <span>Cuando te lo confirmemos.</span></h4>
+        <h4 class="q" id="lPago">Pago. <span>¿Cómo prefieres pagar?</span></h4>
         <div class="opts cols2" role="radiogroup" aria-labelledby="lPago">
-          <label class="opt"><input type="radio" name="pago" value="Bizum" ${cliente.pago!=="Efectivo"?"checked":""}><span class="o-txt"><span class="o-t">Bizum</span><span class="o-s">Te paso los datos al contactarte</span></span></label>
+          <label class="opt"><input type="radio" name="pago" value="Bizum" ${cliente.pago!=="Efectivo"?"checked":""}><span class="o-txt"><span class="o-t">Bizum</span><span class="o-s">Al ${TEL_BIZUM_TXT} · al terminar verás el importe</span></span></label>
           <label class="opt"><input type="radio" name="pago" value="Efectivo" ${cliente.pago==="Efectivo"?"checked":""}><span class="o-txt"><span class="o-t">Efectivo</span><span class="o-s">Al recogerlo en mano</span></span></label>
         </div>
       </div>
@@ -1118,15 +1140,24 @@ function pintarCesta(){
       </div>
       <div class="err" id="eEnvio"></div>
       <button class="pill block" type="submit" id="enviar">Finalizar pedido</button>
-      <p class="small">No pagas nada ahora: te confirmaré el precio final y el diseño antes de empezar.</p>
+      <p class="small">Al finalizar recibirás tu número de pedido. Si pagas por Bizum, verás el número y el importe para hacerlo al momento.</p>
     </form>`;
   body.querySelectorAll("[data-rm]").forEach(b=>b.addEventListener("click", ()=>{ cesta.splice(+b.dataset.rm,1); guardarCesta(); pintarCesta(); }));
   body.querySelectorAll("[data-edit]").forEach(b=>b.addEventListener("click", ()=>{ const k=+b.dataset.edit; cerrar("cartBg"); abrirElegir(cesta[k].producto_id, k); }));
   $("#seguir").addEventListener("click", ()=>{ cerrar("cartBg"); $("#coleccion").scrollIntoView({behavior:"smooth"}); });
-  const dir=()=>{ $("#dirBox").hidden = body.querySelector('input[name="entrega"]:checked').value!=="Envío"; };
+  const dir=()=>{ const ent=body.querySelector('input[name="entrega"]:checked').value; $("#dirBox").hidden = ent!=="Envío"; pintarTotales(ent); };
   body.querySelectorAll('input[name="entrega"]').forEach(r=>r.addEventListener("change",dir)); dir();
   [["fNombre","eNombre"],["fApellidos","eApellidos"],["fTel","eTel"],["fIg","eIg"],["fCalle","eCalle"],["fCP","eCP"],["fPob","ePob"]].forEach(([f,e])=>$("#"+f).addEventListener("input", ()=>$("#"+e).classList.remove("show")));
   $("#form").addEventListener("submit", enviar);
+}
+function pintarTotales(entrega){
+  const box=$("#totales"); if(!box) return;
+  const sub=+box.dataset.sub||0, env=gastosEnvio(sub, entrega);
+  $("#tEnvio").hidden = entrega!=="Envío";
+  $("#tEnvio span:last-child").innerHTML = env ? euros(env) : '<b class="gratis">Gratis</b>';
+  $("#tTotal").textContent = euros(sub+env);
+  const falta = ENVIO_GRATIS_MAS_DE - sub;
+  $("#tNota").textContent = entrega!=="Envío" ? "" : (env ? `Envío gratis en pedidos de más de ${euros(ENVIO_GRATIS_MAS_DE)}: te faltan ${euros(Math.max(falta,0.01))}.` : "¡Tu pedido tiene el envío gratis!");
 }
 function nuevaRef(){
   const a=new Date(), dd=n=>String(n).padStart(2,"0");
@@ -1135,7 +1166,7 @@ function nuevaRef(){
 async function crearPedido(c, piezas){
   const cuerpo={
     p_cliente:{nombre:c.nombre, apellidos:c.apellidos, telefono:c.telefono, instagram:c.instagram, entrega:c.entrega, pago:c.pago,
-             calle:c.calle, piso:c.piso, cp:c.cp, poblacion:c.poblacion, notas:c.notas},
+             calle:c.calle, piso:c.piso, cp:c.cp, poblacion:c.poblacion, notas:c.notas, gastos_envio:c.gastos_envio||0, total:c.total||null},
     p_piezas: piezas.map(it=>({producto:it.producto, producto_id:it.producto_id, precio:it.precio, opcion:it.opcion||null,
              color:it.color_nombre||null, color_hex:it.color_hex||null, color_texto:it.color_texto_nombre||null, color_texto_hex:it.color_texto_hex||null,
              texto:it.texto||null, letras:it.letras||null, nota:it.nota||null, con_foto:!!it.foto})),
@@ -1162,7 +1193,7 @@ function avisarNtfy(ref, c, piezas){
       return `• ${it.producto}${extra?` (${extra})`:""}${it.precio!=null?` — ${euros(it.precio)}`:""}${it.foto?" 📷":""}`;
     });
     const quien=[c.nombre, c.apellidos].filter(Boolean).join(" ");
-    const msg=[`${quien} · ${euros(total)}`, ...lineas, c.instagram?`Instagram: @${c.instagram}`:"", c.entrega?`Entrega: ${c.entrega}`:""].filter(Boolean).join("\n");
+    const msg=[`${quien} · ${euros(total+(c.gastos_envio||0))}${c.gastos_envio?` (envío ${euros(c.gastos_envio)})`:c.entrega==="Envío"?" (envío gratis)":""}${c.pago?` · ${c.pago}`:""}`, ...lineas, c.instagram?`Instagram: @${c.instagram}`:"", c.entrega?`Entrega: ${c.entrega}`:""].filter(Boolean).join("\n");
     fetch("https://ntfy.sh/", {method:"POST", keepalive:true, body:JSON.stringify({
       topic:NTFY_TEMA, title:`Nuevo pedido ${ref}`, message:msg, tags:["package"], priority:4
     })}).catch(()=>{});
@@ -1195,7 +1226,7 @@ function resumenTexto(c, ref){
   out.push(piezas.join("\n\n"));
   out.push(`————————————`);
   out.push(`💶 Total: ${euros(total)}`+(consultar?` + ${consultar===1?"1 pieza":consultar+" piezas"} a consultar`:""));
-  if(c.entrega==="Envío") out.push(`_(gastos de envío aparte)_`);
+  if(c.entrega==="Envío"){ const env=gastosEnvio(total, "Envío"); out.push(env?`📦 Envío: ${euros(env)} · Total: ${euros(total+env)}`:`📦 Envío gratis`); }
   out.push(``);
   out.push(`👤 *MIS DATOS*`);
   out.push(`${c.nombre} ${c.apellidos}`);
@@ -1236,7 +1267,10 @@ async function enviar(e){
   }
   if(fallos.length){ $("#"+fallos[0]).focus(); $("#"+fallos[0]).scrollIntoView({behavior:"smooth", block:"center"}); return; }
   c.direccion = c.entrega==="Envío" ? [c.calle, c.piso, `${c.cp} ${c.poblacion}`].filter(Boolean).join(", ") : "";
-  cliente={...c}; delete cliente.notas; store.set("nvr_cliente", cliente);
+  const subtotalPedido = cesta.reduce((s,it)=>s+(+it.precio||0),0);
+  c.gastos_envio = gastosEnvio(subtotalPedido, c.entrega);
+  c.total = subtotalPedido + c.gastos_envio;
+  cliente={...c}; delete cliente.notas; delete cliente.gastos_envio; delete cliente.total; store.set("nvr_cliente", cliente);
   const piezas=cesta.slice();
   const btn=$("#enviar"); btn.disabled=true; btn.textContent="Enviando tu pedido…"; $("#eEnvio").classList.remove("show");
   let numero=null;
@@ -1257,18 +1291,25 @@ async function enviar(e){
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>
       <h3>¡Pedido realizado!</h3>
       <p class="n-pedido">Pedido nº <b>${esc(String(numero))}</b></p>
-      <p>¡Gracias! Me pondré en contacto contigo lo antes posible para confirmarte el diseño, el precio y el pago${c.pago==="Bizum"?" por Bizum":c.pago==="Efectivo"?" en efectivo":""}.</p>
+      <p>¡Gracias! Me pondré en contacto contigo lo antes posible para confirmarte el diseño${c.pago==="Efectivo"?" y el pago en efectivo":""}.</p>
+      ${c.pago==="Bizum"?`<div class="bizum">Haz un Bizum de <b>${euros(total+(c.gastos_envio||0))}</b> al
+        <b class="n">${TEL_BIZUM_TXT}</b>
+        con el concepto <b>${esc(String(numero))}</b>.
+        <div class="acciones"><button class="pill soft" type="button" id="copiarBizum">Copiar número</button></div></div>`:""}
+      <a class="pill wa block" id="enviarWa" target="_blank" rel="noopener" href="https://wa.me/34${TEL_BIZUM}?text=${encodeURIComponent(`¡Hola! Acabo de hacer el pedido ${numero} en la web de NVR Studio. Importe total: ${euros(total+(c.gastos_envio||0))}${c.pago==="Bizum"?" (pago por Bizum)":""}. Soy ${c.nombre} ${c.apellidos}.`)}">Enviar mi pedido por WhatsApp</a>
       ${piezas.some(i=>i.foto)?`<p>Con tu foto prepararé el diseño y te lo enviaré por Instagram${c.instagram?` a <b>@${esc(c.instagram)}</b>`:""} para que lo apruebes.</p>`:""}
       <p class="small">Guarda tu número de pedido por si necesitas consultarlo.</p>
     </div>
     <div class="resumen-pedido">
       ${piezas.map(it=>`<div class="rp-item"><span><b>${esc(it.producto)}</b>${it.detalles?`<br><small>${esc(it.detalles)}</small>`:""}</span><span>${it.precio!=null?euros(it.precio):"A confirmar"}</span></div>`).join("")}
-      <div class="rp-item rp-total"><span>Precio</span><span>${total?euros(total)+(consultar?" + ":""):""}${consultar?"te lo confirmo yo":""}</span></div>
-      <p class="small">${c.entrega==="Envío"?`Envío a ${esc(c.direccion)} (gastos de envío aparte)`:"Recogida en Terrassa"}</p>
+      ${c.entrega==="Envío"?`<div class="rp-item"><span>Envío</span><span>${c.gastos_envio?euros(c.gastos_envio):"Gratis"}</span></div>`:""}
+      <div class="rp-item rp-total"><span>Total</span><span>${euros(total+(c.gastos_envio||0))}</span></div>
+      <p class="small">${c.entrega==="Envío"?`Envío a ${esc(c.direccion)}`:"Recogida en Terrassa"}</p>
     </div>
     <button class="pill soft block" type="button" id="cerrarFin">Volver a la tienda</button>`;
   $("#cartBg .sheet").scrollTop=0;
   $("#cerrarFin").addEventListener("click", ()=>cerrar("cartBg"));
+  const cb=$("#copiarBizum"); if(cb) cb.addEventListener("click", async ()=>{ try{ await navigator.clipboard.writeText(TEL_BIZUM); toast("Número copiado"); }catch(e){ toast(TEL_BIZUM_TXT); } });
 }
 
 /* ===== Inicio ===== */
