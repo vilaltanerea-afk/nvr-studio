@@ -1296,7 +1296,7 @@ async function enviar(e){
         <b class="n">${TEL_BIZUM_TXT}</b>
         con el concepto <b>${esc(String(numero))}</b>.
         <div class="acciones"><button class="pill soft" type="button" id="copiarBizum">Copiar número</button></div></div>`:""}
-      <a class="pill wa block" id="enviarWa" target="_blank" rel="noopener" href="https://wa.me/34${TEL_BIZUM}?text=${encodeURIComponent(`Hola! Acabo de hacer el pedido ${numero} en la web de NVR Studio. Importe total: ${euros(total+(c.gastos_envio||0))}${c.pago==="Bizum"?" (pago por Bizum)":""}.`)}">Enviar mi pedido por WhatsApp</a>
+      <a class="pill wa block" id="enviarWa" target="_blank" rel="noopener" href="https://wa.me/34${TEL_BIZUM}?text=${encodeURIComponent(`¡Hola! Acabo de hacer el pedido ${numero} en la web de NVR Studio. Importe total: ${euros(total+(c.gastos_envio||0))}${c.pago==="Bizum"?" (pago por Bizum)":""}. Soy ${c.nombre} ${c.apellidos}.`)}">Enviar mi pedido por WhatsApp</a>
       ${piezas.some(i=>i.foto)?`<p>Con tu foto prepararé el diseño y te lo enviaré por Instagram${c.instagram?` a <b>@${esc(c.instagram)}</b>`:""} para que lo apruebes.</p>`:""}
       <p class="small">Guarda tu número de pedido por si necesitas consultarlo.</p>
     </div>
