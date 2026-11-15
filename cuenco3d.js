@@ -11,7 +11,7 @@ const C3D = {
   "blanco":{hex:"#E5E4E1"}, "gris-perla":{hex:"#B6BFCF", brillo:"perla"}, "beige":{hex:"#E0C397"}, "madera":{hex:"#F2DDB0"},
   "dorado":{hex:"#F2C12E", brillo:"seda"}, "amarillo":{hex:"#F6D736"}, "verde":{hex:"#D5EAC0"}, "verde-lima":{hex:"#D1E932"},
   "turquesa":{hex:"#14C79E"}, "azul-pastel":{hex:"#9ADBF4"}, "morado-pastel":{hex:"#B99AF5"}, "rosa-pastel":{hex:"#F6C8DE"},
-  "rojo":{hex:"#ED3C2B"}, "cobre":{hex:"#B4502F", brillo:"metal"}, "marron-chocolate":{hex:"#D68E60"},
+  "rojo":{hex:"#ED3C2B"}, "cobre":{hex:"#B4502F", brillo:"metal"}, "marron-chocolate":{hex:"#A45A2C"},
   "rojo-negro":{hex:"#2E2D35", hex2:"#B84B68", camaleon:true}, "negro":{hex:"#3A3E40"},
 };
 const POR_DEFECTO = "turquesa";
