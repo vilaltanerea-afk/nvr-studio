@@ -532,6 +532,10 @@
   .promo-row input{flex:1; min-width:0; text-transform:uppercase; letter-spacing:.04em;}
   .promo-row .pill{flex:none; padding-left:18px; padding-right:18px;}
   .promo-ok{display:flex; justify-content:space-between; align-items:center; background:#eaf6ee; color:#1a7f37; padding:10px 14px; border-radius:4px; font-size:14px;}
+  .promo-sug{display:flex; flex-direction:column; gap:10px; background:#fbf1f3; border:1px solid rgba(108,7,32,.18); border-radius:4px; padding:14px 16px; font-size:14.5px; line-height:1.45; margin-bottom:8px;}
+  .promo-sug b{color:var(--hilo);}
+  .promo-sug .pill{align-self:flex-start;}
+  .promo-nota{font-size:12.5px; color:var(--ink-2); margin:0;}
   .promo-msg{font-size:13px; color:var(--ink-2); margin:0;}
   .promo-msg:empty{display:none;}
   .promo-msg.mal{color:var(--danger);}
@@ -925,6 +929,9 @@ function comprobarCodigo(txt){
   if(new Date()>p.hasta) return {ok:false, error:"Este código ha caducado."};
   return {ok:true, codigo:cod, promo:p};
 }
+function sugerirNavidad(){
+  return comprobarCodigo("PROMONAVIDAD").ok && cesta.some(it=>PROMOS.PROMONAVIDAD.productos.includes(it.producto_id));
+}
 function descuentoDe(items, cod){
   const r=comprobarCodigo(cod); if(!r.ok) return 0;
   const d=items.filter(it=>r.promo.productos.includes(it.producto_id)).reduce((s,it)=>s+(+it.precio||0)*r.promo.pct/100,0);
@@ -933,7 +940,7 @@ function descuentoDe(items, cod){
 if(codigoPromo && !comprobarCodigo(codigoPromo).ok){ codigoPromo=""; store.set("nvr_promo",""); }
 (()=>{ const b=document.getElementById("promoBanner"); if(!b) return;
   if(new Date()<=PROMOS.PROMONAVIDAD.hasta){ b.hidden=false;
-    b.addEventListener("click", ()=>{ codigoPromo="PROMONAVIDAD"; store.set("nvr_promo",codigoPromo); toast("Código PROMONAVIDAD aplicado a tus cuencos"); if($("#totales")) pintarCesta(); });
+    b.addEventListener("click", ()=>{ if(codigoPromo && codigoPromo!=="PROMONAVIDAD"){ toast(`Ya tienes el código ${codigoPromo}: los descuentos no son acumulables`); return; } codigoPromo="PROMONAVIDAD"; store.set("nvr_promo",codigoPromo); toast("Código PROMONAVIDAD aplicado a tus cuencos"); if($("#totales")) pintarCesta(); });
   } else b.remove();
 })();
 
@@ -1328,8 +1335,9 @@ function pintarCesta(){
         <p class="t-nota" id="tNota"></p>
       </div>
       <div class="promo" id="promoBox">
-        ${codigoPromo ? `<div class="promo-ok"><span>✓ Código <b>${esc(codigoPromo)}</b> aplicado</span><button type="button" class="link" id="quitarPromo">Quitar</button></div>`
-        : `<label class="label" for="fPromo">Código promocional</label>
+        ${codigoPromo ? `<div class="promo-ok"><span>✓ Código <b>${esc(codigoPromo)}</b> aplicado</span><button type="button" class="link" id="quitarPromo">Quitar</button></div><p class="promo-nota">Los códigos no son acumulables: solo se puede usar uno por pedido.</p>`
+        : `${sugerirNavidad() ? `<div class="promo-sug"><span>🎄 Tienes un <b>${PROMOS.PROMONAVIDAD.pct}% de descuento en tus cuencos</b> con el código <b>PROMONAVIDAD</b> (pedidos hasta el 12 de diciembre).</span><button type="button" class="pill" id="usarNavidad">Aplicar descuento</button></div>` : ""}
+        <label class="label" for="fPromo">${sugerirNavidad() ? "¿Tienes otro código?" : "Código promocional"}</label>
         <div class="promo-row"><input id="fPromo" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Escribe tu código"><button type="button" class="pill soft" id="aplicarPromo">Aplicar</button></div>`}
         <p class="promo-msg" id="promoMsg"></p>
       </div>
@@ -1425,6 +1433,7 @@ function pintarCesta(){
     ap.addEventListener("click", aplicar);
     $("#fPromo").addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); aplicar(); } });
   }
+  const un=$("#usarNavidad"); if(un) un.addEventListener("click", ()=>{ codigoPromo="PROMONAVIDAD"; store.set("nvr_promo",codigoPromo); pintarCesta(); toast("Descuento PROMONAVIDAD aplicado"); });
   const qp=$("#quitarPromo"); if(qp) qp.addEventListener("click", ()=>{ codigoPromo=""; store.set("nvr_promo",""); pintarCesta(); });
   [["fNombre","eNombre"],["fApellidos","eApellidos"],["fTel","eTel"],["fIg","eIg"],["fCalle","eCalle"],["fCP","eCP"],["fPob","ePob"]].forEach(([f,e])=>$("#"+f).addEventListener("input", ()=>$("#"+e).classList.remove("show")));
   $("#form").addEventListener("submit", enviar);
