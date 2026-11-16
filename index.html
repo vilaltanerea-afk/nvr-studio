@@ -11,142 +11,6 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="NVR Studio">
 <meta name="theme-color" content="#ffffff">
-<link rel="canonical" href="https://nvilaltastudio.com/">
-<!-- Vista previa al compartir el enlace (WhatsApp, Instagram, Facebook…) -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="NVR Studio">
-<meta property="og:locale" content="es_ES">
-<meta property="og:url" content="https://nvilaltastudio.com/">
-<meta property="og:title" content="NVR Studio · Diseño e impresión 3D personalizada">
-<meta property="og:description" content="Cuencos para mascotas, lightbox, letras bubble y llaveros impresos en 3D con tu nombre y tus colores. Envíos a toda España.">
-<meta property="og:image" content="https://nvilaltastudio.com/imagenes/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Cuencos personalizados de NVR Studio con nombres de mascotas">
-<meta name="twitter:card" content="summary_large_image">
-<!-- Datos para Google -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "OnlineStore",
- "name": "NVR Studio",
- "url": "https://nvilaltastudio.com/",
- "logo": "https://nvilaltastudio.com/imagenes/logo.png",
- "image": "https://nvilaltastudio.com/imagenes/og.jpg",
- "description": "Diseño e impresión 3D personalizada: cuencos para mascotas, lightbox, letras bubble, llaveros y más, con tu nombre y tus colores.",
- "sameAs": [
-  "https://www.instagram.com/nvilalta.studio/"
- ],
- "address": {
-  "@type": "PostalAddress",
-  "addressLocality": "Terrassa",
-  "addressRegion": "Barcelona",
-  "addressCountry": "ES"
- },
- "areaServed": "ES",
- "currenciesAccepted": "EUR",
- "paymentAccepted": "Bizum, efectivo",
- "hasOfferCatalog": {
-  "@type": "OfferCatalog",
-  "name": "Piezas impresas en 3D personalizadas",
-  "itemListElement": [
-   {
-    "@type": "Offer",
-    "price": "20",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "itemOffered": {
-     "@type": "Product",
-     "name": "Cuenco personalizado",
-     "image": "https://nvilaltastudio.com/imagenes/cuenco-0.webp",
-     "brand": {
-      "@type": "Brand",
-      "name": "NVR Studio"
-     }
-    }
-   },
-   {
-    "@type": "Offer",
-    "price": "35",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "itemOffered": {
-     "@type": "Product",
-     "name": "Lightbox personalizado",
-     "image": "https://nvilaltastudio.com/imagenes/lightbox-0.webp",
-     "brand": {
-      "@type": "Brand",
-      "name": "NVR Studio"
-     }
-    }
-   },
-   {
-    "@type": "Offer",
-    "price": "7",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "itemOffered": {
-     "@type": "Product",
-     "name": "Letras bubble (precio por letra)",
-     "image": "https://nvilaltastudio.com/imagenes/bubble-0.webp",
-     "brand": {
-      "@type": "Brand",
-      "name": "NVR Studio"
-     }
-    }
-   },
-   {
-    "@type": "Offer",
-    "price": "20",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "itemOffered": {
-     "@type": "Product",
-     "name": "Soporte de portátil",
-     "image": "https://nvilaltastudio.com/imagenes/portatil-0.webp",
-     "brand": {
-      "@type": "Brand",
-      "name": "NVR Studio"
-     }
-    }
-   },
-   {
-    "@type": "Offer",
-    "price": "7",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "itemOffered": {
-     "@type": "Product",
-     "name": "Llaveros personalizados",
-     "image": "https://nvilaltastudio.com/imagenes/llavero-0.webp",
-     "brand": {
-      "@type": "Brand",
-      "name": "NVR Studio"
-     }
-    }
-   },
-   {
-    "@type": "Offer",
-    "price": "20",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "itemOffered": {
-     "@type": "Product",
-     "name": "Soporte de vinilos",
-     "image": "https://nvilaltastudio.com/imagenes/vinilos-0.webp",
-     "brand": {
-      "@type": "Brand",
-      "name": "NVR Studio"
-     }
-    }
-   }
-  ]
- }
-}
-</script>
-<!-- Estadísticas sin cookies (Cloudflare Web Analytics) -->
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script>
-<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3f82c08da95349618b1982d0f730f29e"}'></script>
 <style>
   :root{
     --bg:#ffffff;
@@ -430,11 +294,8 @@
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    *:not(.sheet){animation:none !important;}
-    .sheet{animation:fundido .2s ease !important;}
-    *, *::before, *::after{transition-property:opacity, color, background-color, border-color, box-shadow !important;}
+    *{animation:none !important; transition:none !important;}
   }
-  @keyframes fundido{from{opacity:0}}
   .n-pedido{font-size:20px; color:var(--ink)!important; margin:4px 0 10px;}
   .n-pedido b{color:var(--hilo); font-size:24px;}
   .resumen-pedido{background:var(--mist); border-radius:var(--r-md); padding:6px 16px 12px; margin:18px 0;}
@@ -521,6 +382,21 @@
   .vcap .vl span{display:inline-flex; align-items:center; gap:5px; white-space:nowrap;}
   .vcap i{width:10px; height:10px; border-radius:50%; display:inline-block; box-shadow:0 0 0 1px rgba(255,255,255,.5);}
 
+  .promo-banner{display:block; width:100%; border:0; margin:0; cursor:pointer; background:var(--hilo); color:#fff; font:inherit; font-size:13.5px; line-height:1.35; padding:9px 16px; text-align:center;}
+  .promo-banner[hidden]{display:none;}
+  .promo-banner b.cod{letter-spacing:.06em; background:rgba(255,255,255,.16); padding:1px 7px; border-radius:4px; white-space:nowrap;}
+  @media(max-width:520px){ .promo-banner .pb-fin{display:block; opacity:.85; font-size:12px;} .promo-banner .pb-largo{display:none;} .promo-banner{font-size:13px; padding:8px 12px;} }
+  .t-desc{color:#1a7f37 !important; font-weight:600;}
+  .t-desc[hidden]{display:none;}
+  .promo{display:flex; flex-direction:column; gap:6px;}
+  .promo-row{display:flex; gap:8px;}
+  .promo-row input{flex:1; min-width:0; text-transform:uppercase; letter-spacing:.04em;}
+  .promo-row .pill{flex:none; padding-left:18px; padding-right:18px;}
+  .promo-ok{display:flex; justify-content:space-between; align-items:center; background:#eaf6ee; color:#1a7f37; padding:10px 14px; border-radius:4px; font-size:14px;}
+  .promo-msg{font-size:13px; color:var(--ink-2); margin:0;}
+  .promo-msg:empty{display:none;}
+  .promo-msg.mal{color:var(--danger);}
+
   /* ================= Variante «cuadrícula» (estilo boutique) ================= */
   :root{--r-xl:0px; --r-lg:0px; --r-md:2px;}
   body{letter-spacing:.005em;}
@@ -532,7 +408,7 @@
   .bag span:not(.n){display:none;}
   .logo{height:34px;}
   .chooser{border-top:0;}
-  .chooser ul{gap:26px; padding:6px 22px 14px; scroll-padding-inline:22px;}
+  .chooser ul{gap:26px; padding:6px 22px 14px;}
   .chooser a{width:auto; flex-direction:row; gap:0; font-size:12.5px; text-transform:uppercase; letter-spacing:.12em; padding:4px 0; border-radius:0; border-bottom:1px solid transparent;}
   .chooser a.on{border-bottom-color:var(--ink);}
   .chooser img{display:none;}
@@ -588,49 +464,14 @@
   .opt{border-radius:2px !important;}
   input, textarea{border-radius:2px;}
   .arriba{background:var(--ink); box-shadow:0 8px 22px rgba(0,0,0,.25);}
-  /* Casilla de privacidad y enlaces del pie */
-  .acepto{display:flex; gap:12px; align-items:flex-start; font-size:15px; line-height:1.4; cursor:pointer;}
-  .acepto input{width:20px; height:20px; flex:none; margin:1px 0 0; padding:0; accent-color:var(--ink); background:none; border:0; box-shadow:none; cursor:pointer;}
-  .acepto a{color:var(--ink); text-decoration:underline; text-underline-offset:3px;}
-  .foot-links{white-space:nowrap;}
-  @media (max-width:740px){ .arriba{width:44px; height:44px; opacity:.9;} }
-
-  /* ---------- Portada: texto más legible sobre la foto ---------- */
-  .hero::after{background:linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.22) 55%, rgba(0,0,0,.6) 100%);}
-  .hero h1{text-shadow:0 2px 24px rgba(0,0,0,.3);}
-  .hero .sub{color:#fff; text-shadow:0 1px 14px rgba(0,0,0,.35);}
-
-  /* ---------- Cuenco 3D dentro de «Personalizar» ---------- */
-  .visor3d{position:sticky; top:66px; z-index:1; margin:0 -20px; height:clamp(220px, 36vh, 340px); overflow:hidden;
-    background:radial-gradient(120% 90% at 50% 35%, #f4f2f0 0%, #e8e5e2 60%, #dedad6 100%); border-bottom:1px solid var(--line);}
-  .visor3d[hidden]{display:none;}
-  .visor3d canvas{display:block; width:100%; height:100%; touch-action:none; cursor:grab; opacity:0; transition:opacity .35s ease;}
-  .visor3d canvas:active{cursor:grabbing;}
-  .visor3d.listo canvas{opacity:1;}
-  .v3d-load{position:absolute; inset:0; display:grid; place-items:center; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#55555a; transition:opacity .25s ease;}
-  .visor3d.listo .v3d-load{opacity:0; pointer-events:none;}
-  .v3d-aviso{position:absolute; top:10px; left:0; right:0; text-align:center; font-size:12px; color:#55555a;}
-  .v3d-aviso[hidden]{display:none;}
-  .v3d-ui{position:absolute; left:0; right:0; bottom:10px; display:flex; justify-content:center; align-items:center; gap:12px; pointer-events:none;}
-  .v3d-ui > *{pointer-events:auto;}
-  .v3d-frente{height:36px; padding:0 14px; border:1px solid rgba(0,0,0,.18); border-radius:999px; background:rgba(255,255,255,.82); font-size:11px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; transition:transform .16s cubic-bezier(.23,1,.32,1), background-color .16s ease;}
-  .v3d-frente:active{transform:scale(.97);}
-  .v3d-hint{font-size:12px; color:#55555a; transition:opacity .3s ease;}
-  .v3d-hint.off{opacity:0;}
-  .sheet.con3d .paso{scroll-margin-top:calc(clamp(220px, 36vh, 340px) + 76px);}
-
-  /* ---------- Detalles de movimiento ---------- */
-  .ficha:active .placa{transform:translateY(-1px) scale(.97); transition-duration:.12s;}
-  .js .rail img, .js .gp img{opacity:0; transition:opacity .45s ease, transform .8s var(--ease);}
-  .js .rail img.cargada, .js .gp img.cargada{opacity:1;}
-  @media (hover:none){
-    .chooser a:hover img, .gp:hover img, .rail button:hover img, .ficha:hover .placa, .arriba:hover, .tela:hover{transform:none;}
-  }
 </style>
 </head>
 <body>
 
 <header class="top">
+  <button class="promo-banner" type="button" id="promoBanner" hidden>
+    <span>🎄 <b>15%<span class="pb-largo"> de descuento</span> en cuencos</b> con el código <b class="cod">PROMONAVIDAD</b><span class="pb-fin"> · pedidos hasta el 12 de diciembre</span></span>
+  </button>
   <div class="wrap bar">
     <a href="#inicio" aria-label="NVR Studio, inicio"><img class="logo" src="imagenes/logo.png" alt="NVR Studio"></a>
     <button class="bag" id="cartBtn" type="button" aria-label="Ver mi pedido">
@@ -649,8 +490,8 @@
       <h1>Diseñado para ti.<br>Capa a capa.</h1>
       <p class="sub">Piezas impresas en 3D y personalizadas con el nombre y los colores que elijas.</p>
       <div class="cta">
-        <button class="pill" type="button" data-elegir="cuencos">Diseña tu cuenco</button>
-        <a class="link" href="#coleccion">Ver todas las piezas ›</a>
+        <a class="pill" href="#coleccion">Elegir el mío</a>
+        <a class="link" href="#colores">Ver los colores ›</a>
       </div>
       <svg class="scroll" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
     </div>
@@ -677,11 +518,11 @@
     <div class="wrap">
       <h2>Así de fácil.</h2>
       <ol class="steps">
-        <li><div class="k">1</div><h3>Elige tu pieza</h3><p>Mira las fotos y pulsa «Personalizar» en la que más te guste.</p></li>
+        <li><div class="k">1</div><h3>Elige tu pieza</h3><p>Desliza las fotos y pulsa «Personalizar» en la que más te guste.</p></li>
         <li><div class="k">2</div><h3>Hazla tuya</h3><p>Elige los colores, escribe el nombre o el texto y cuéntame cualquier detalle.</p></li>
         <li><div class="k">3</div><h3>Finaliza tu pedido</h3><p>Recibirás tu número de pedido al momento. Puedes pagar por Bizum al instante. Envío 6 €, gratis en pedidos de más de 50 €.</p></li>
       </ol>
-      <p class="note">Cada pieza se diseña e imprime bajo pedido, así que lleva su tiempo de preparación: te diré el plazo al confirmar tu pedido. En las piezas que hago a partir de tu foto, te enviaré el diseño para que lo apruebes antes de imprimirlo. Los colores en pantalla pueden variar un poco respecto al filamento real.</p>
+      <p class="note">Cada pieza se diseña e imprime bajo pedido, así que lleva su tiempo de preparación. Te confirmaré el precio final y el plazo antes de empezar. Los colores en pantalla pueden variar un poco respecto al filamento real.</p>
     </div>
   </section>
 </main>
@@ -690,7 +531,7 @@
   <div class="wrap foot">
     <img class="logo" src="imagenes/logo.png" alt="NVR Studio">
     <span>Diseño e impresión 3D personalizada. Envíos por toda España.</span>
-    <span class="foot-links"><a href="https://www.instagram.com/nvilalta.studio/" target="_blank" rel="noopener">@nvilalta.studio en Instagram</a> · <a href="privacidad.html">Privacidad</a></span>
+    <a href="https://www.instagram.com/nvilalta.studio/" target="_blank" rel="noopener">@nvilalta.studio en Instagram</a>
   </div>
 </footer>
 
@@ -703,12 +544,6 @@
       <button class="x" type="button" data-close="pickBg" aria-label="Cerrar">×</button>
     </div>
     <div class="sheet-body cfg">
-      <div class="visor3d" id="visor3d" hidden role="img" aria-label="Vista 3D de tu cuenco">
-        <canvas aria-hidden="true"></canvas>
-        <div class="v3d-load">Preparando tu cuenco…</div>
-        <p class="v3d-aviso" hidden>Elige un color abajo para verlo en tu cuenco</p>
-        <div class="v3d-ui"><button class="v3d-frente" type="button">Ver el nombre</button><span class="v3d-hint">Arrastra para girarlo</span></div>
-      </div>
       <div class="prod-mini" id="pickProd"></div>
 
       <section class="paso" id="secOpcion" hidden>
@@ -799,7 +634,6 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-document.documentElement.classList.add("js");
 /* ===== Configuración ===== */
 // Supabase: aquí se guardan los pedidos y se genera el número de pedido (NVR-0001…)
 const SUPABASE_URL  = "https://lvugkubtqggbueievrcd.supabase.co";
@@ -885,13 +719,39 @@ const foto = (p,i) => p.imgs[i];
 /* ===== Utilidades ===== */
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const euros = n => n==null ? "" : `${n} €`;
+const euros = n => n==null ? "" : (Number.isInteger(+n) ? `${n} €` : `${(+n).toFixed(2).replace(".", ",")} €`);
 const precioTxt = p => p!=null ? euros(p) : "Precio según opciones";
 function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2200); }
 const store = {
   get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } },
   set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
+/* ===== Códigos promocionales ===== */
+const PROMOS = {
+  CANICHADA:     {pct:15, productos:["cuencos"], hasta:new Date(2026,11,30,23,59,59)},
+  TECKELSLLEIDA: {pct:15, productos:["cuencos"], hasta:new Date(2026,11,30,23,59,59)},
+  PROMONAVIDAD:  {pct:15, productos:["cuencos"], hasta:new Date(2026,11,12,23,59,59)},
+};
+let codigoPromo = store.get("nvr_promo", "");
+function comprobarCodigo(txt){
+  const cod=String(txt||"").trim().toUpperCase().replace(/\s+/g,"");
+  if(!cod) return {ok:false, error:""};
+  const p=PROMOS[cod];
+  if(!p) return {ok:false, error:"Este código no existe."};
+  if(new Date()>p.hasta) return {ok:false, error:"Este código ha caducado."};
+  return {ok:true, codigo:cod, promo:p};
+}
+function descuentoDe(items, cod){
+  const r=comprobarCodigo(cod); if(!r.ok) return 0;
+  const d=items.filter(it=>r.promo.productos.includes(it.producto_id)).reduce((s,it)=>s+(+it.precio||0)*r.promo.pct/100,0);
+  return Math.round(d*100)/100;
+}
+if(codigoPromo && !comprobarCodigo(codigoPromo).ok){ codigoPromo=""; store.set("nvr_promo",""); }
+(()=>{ const b=document.getElementById("promoBanner"); if(!b) return;
+  if(new Date()<=PROMOS.PROMONAVIDAD.hasta){ b.hidden=false;
+    b.addEventListener("click", ()=>{ codigoPromo="PROMONAVIDAD"; store.set("nvr_promo",codigoPromo); toast("Código PROMONAVIDAD aplicado a tus cuencos"); if($("#totales")) pintarCesta(); });
+  } else b.remove();
+})();
 
 /* ===== Hojas ===== */
 let abiertas = 0;
@@ -919,7 +779,7 @@ function pintarProductos(){
         <p class="desc">${esc(p.desc)}</p>
         <p class="price">${p.precio!=null?desdeTxt(p):"Precio según tamaño y opciones"}</p>
         <div class="cta">
-          <button class="pill" type="button" data-elegir="${p.id}">${p.id==="cuencos"?"Personalizar en 3D":"Personalizar"}</button>
+          <button class="pill" type="button" data-elegir="${p.id}">Personalizar</button>
           <a class="link" href="#como">Cómo pedir ›</a>
         </div>
       </div>
@@ -1030,22 +890,6 @@ function abrirElegir(prodId, editIdx){
   resumenPie();
   if(!$("#pickBg").classList.contains("open")) abrir("pickBg");
   $("#pickBg .sheet").scrollTop = 0;
-  preparar3D(p);
-}
-/* ===== Cuenco 3D (solo se descarga al abrir Cuencos) ===== */
-let c3d = null, c3dCarga = null;
-function preparar3D(p){
-  const es3d = p.id==="cuencos", v = $("#visor3d");
-  v.hidden = !es3d; $("#pickBg .sheet").classList.toggle("con3d", es3d);
-  if(!es3d) return;
-  if(!c3dCarga) c3dCarga = import("./cuenco3d.js")
-    .then(async m => { await m.montar(v); c3d = m; return m; })
-    .catch(err => { console.warn("Vista 3D no disponible", err); v.hidden = true; $("#pickBg .sheet").classList.remove("con3d"); return null; });
-  c3dCarga.then(m => { if(m){ m.activar(); act3D(); } });
-}
-function act3D(){
-  if(!c3d || !eleccion || eleccion.prod.id!=="cuencos") return;
-  c3d.actualizar({ color:eleccion.color, nombre:$("#texto").value, tam:eleccion.opciones[0], placeholder:(eleccion.prod.texto||{}).ph });
 }
 function pintarOpciones(){
   const os = eleccion.prod.opciones||[];
@@ -1116,7 +960,6 @@ function resumenPie(){
   else if(eleccion.color) partes.push(col(eleccion.color).nombre);
   const t=$("#texto").value.trim(); if(p.texto && t) partes.push(`«${t}»`);
   $("#ftResumen").textContent = partes.join(" · ");
-  act3D();
 }
 $("#addBtn").addEventListener("click", () => {
   const p=eleccion.prod;
@@ -1278,9 +1121,16 @@ function pintarCesta(){
         </div>`).join("")}
       <div class="totales" id="totales" data-sub="${total}">
         <div class="t-linea"><span>Productos</span><span>${euros(total)}</span></div>
+        <div class="t-linea t-desc" id="tDesc" hidden><span></span><span></span></div>
         <div class="t-linea" id="tEnvio"><span>Envío</span><span></span></div>
         <div class="total"><span>Total</span><span id="tTotal"></span></div>
         <p class="t-nota" id="tNota"></p>
+      </div>
+      <div class="promo" id="promoBox">
+        ${codigoPromo ? `<div class="promo-ok"><span>✓ Código <b>${esc(codigoPromo)}</b> aplicado</span><button type="button" class="link" id="quitarPromo">Quitar</button></div>`
+        : `<label class="label" for="fPromo">Código promocional</label>
+        <div class="promo-row"><input id="fPromo" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Escribe tu código"><button type="button" class="pill soft" id="aplicarPromo">Aplicar</button></div>`}
+        <p class="promo-msg" id="promoMsg"></p>
       </div>
       <button class="pill soft" type="button" id="seguir">Añadir otra pieza</button>
     </div>
@@ -1352,10 +1202,6 @@ function pintarCesta(){
         <label class="label" for="fNotas">Algo más <span class="opcional">(opcional)</span></label>
         <textarea id="fNotas" placeholder="Para cuándo lo necesitas, si es un regalo…"></textarea>
       </div>
-      <div>
-        <label class="acepto"><input type="checkbox" id="fAcepto"><span>He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
-        <div class="err" id="eAcepto">Para hacer el pedido tienes que aceptar la política de privacidad.</div>
-      </div>
       <div class="err" id="eEnvio"></div>
       <button class="pill block" type="submit" id="enviar">Finalizar pedido</button>
       <p class="small">Al finalizar recibirás tu número de pedido. Si pagas por Bizum, verás el número y el importe para hacerlo al momento.</p>
@@ -1365,18 +1211,33 @@ function pintarCesta(){
   $("#seguir").addEventListener("click", ()=>{ cerrar("cartBg"); $("#coleccion").scrollIntoView({behavior:"smooth"}); });
   const dir=()=>{ const ent=body.querySelector('input[name="entrega"]:checked').value; $("#dirBox").hidden = ent!=="Envío"; pintarTotales(ent); };
   body.querySelectorAll('input[name="entrega"]').forEach(r=>r.addEventListener("change",dir)); dir();
+  const ap=$("#aplicarPromo");
+  if(ap){
+    const aplicar=()=>{ const r=comprobarCodigo($("#fPromo").value);
+      if(!r.ok){ $("#promoMsg").textContent = r.error || "Escribe un código."; $("#promoMsg").classList.add("mal"); return; }
+      codigoPromo=r.codigo; store.set("nvr_promo",codigoPromo); pintarCesta();
+      toast(descuentoDe(cesta,codigoPromo) ? `Código ${codigoPromo} aplicado` : "Código guardado: se aplica a los cuencos"); };
+    ap.addEventListener("click", aplicar);
+    $("#fPromo").addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); aplicar(); } });
+  }
+  const qp=$("#quitarPromo"); if(qp) qp.addEventListener("click", ()=>{ codigoPromo=""; store.set("nvr_promo",""); pintarCesta(); });
   [["fNombre","eNombre"],["fApellidos","eApellidos"],["fTel","eTel"],["fIg","eIg"],["fCalle","eCalle"],["fCP","eCP"],["fPob","ePob"]].forEach(([f,e])=>$("#"+f).addEventListener("input", ()=>$("#"+e).classList.remove("show")));
   $("#form").addEventListener("submit", enviar);
-  $("#fAcepto").addEventListener("change", ()=>$("#eAcepto").classList.remove("show"));
 }
+function entregaActual(){ const r=document.querySelector('input[name="entrega"]:checked'); return r ? r.value : "Envío"; }
 function pintarTotales(entrega){
   const box=$("#totales"); if(!box) return;
-  const sub=+box.dataset.sub||0, env=gastosEnvio(sub, entrega);
+  const desc=descuentoDe(cesta, codigoPromo);
+  const sub=(+box.dataset.sub||0)-desc, env=gastosEnvio(sub, entrega);
+  $("#tDesc").hidden = !desc;
+  if(desc){ $("#tDesc span:first-child").textContent=`Descuento ${codigoPromo} (${PROMOS[codigoPromo].pct}% cuencos)`; $("#tDesc span:last-child").textContent="−"+euros(desc); }
+  const msg=$("#promoMsg");
+  if(msg && codigoPromo && !desc) msg.textContent="Este código solo se aplica a los cuencos. Añade un cuenco para usarlo.";
   $("#tEnvio").hidden = entrega!=="Envío";
   $("#tEnvio span:last-child").innerHTML = env ? euros(env) : '<b class="gratis">Gratis</b>';
   $("#tTotal").textContent = euros(sub+env);
   const falta = ENVIO_GRATIS_MAS_DE - sub;
-  $("#tNota").textContent = entrega!=="Envío" ? "" : (env ? `Envío gratis en pedidos de más de ${euros(ENVIO_GRATIS_MAS_DE)}: te faltan ${euros(Math.max(falta,0.01))}.` : "¡Tu pedido tiene el envío gratis!");
+  $("#tNota").textContent = entrega!=="Envío" ? "" : (env ? (falta>0 ? `Envío gratis en pedidos de más de ${euros(ENVIO_GRATIS_MAS_DE)}: te faltan ${euros(Math.round(falta*100)/100)}.` : `Envío gratis en pedidos de más de ${euros(ENVIO_GRATIS_MAS_DE)}.`) : "¡Tu pedido tiene el envío gratis!");
 }
 function nuevaRef(){
   const a=new Date(), dd=n=>String(n).padStart(2,"0");
@@ -1385,7 +1246,7 @@ function nuevaRef(){
 async function crearPedido(c, piezas){
   const cuerpo={
     p_cliente:{nombre:c.nombre, apellidos:c.apellidos, telefono:c.telefono, instagram:c.instagram, entrega:c.entrega, pago:c.pago,
-             calle:c.calle, piso:c.piso, cp:c.cp, poblacion:c.poblacion, notas:c.notas, gastos_envio:c.gastos_envio||0, total:c.total||null},
+             calle:c.calle, piso:c.piso, cp:c.cp, poblacion:c.poblacion, notas:c.notas, gastos_envio:c.gastos_envio||0, descuento:c.descuento||0, codigo_promo:c.codigo_promo||null, total:c.total||null},
     p_piezas: piezas.map(it=>({producto:it.producto, producto_id:it.producto_id, precio:it.precio, opcion:it.opcion||null,
              color:it.color_nombre||null, color_hex:it.color_hex||null, color_texto:it.color_texto_nombre||null, color_texto_hex:it.color_texto_hex||null,
              texto:it.texto||null, letras:it.letras||null, nota:it.nota||null, con_foto:!!it.foto})),
@@ -1412,7 +1273,7 @@ function avisarNtfy(ref, c, piezas){
       return `• ${it.producto}${extra?` (${extra})`:""}${it.precio!=null?` — ${euros(it.precio)}`:""}${it.foto?" 📷":""}`;
     });
     const quien=[c.nombre, c.apellidos].filter(Boolean).join(" ");
-    const msg=[`${quien} · ${euros(total+(c.gastos_envio||0))}${c.gastos_envio?` (envío ${euros(c.gastos_envio)})`:c.entrega==="Envío"?" (envío gratis)":""}${c.pago?` · ${c.pago}`:""}`, ...lineas, c.instagram?`Instagram: @${c.instagram}`:"", c.entrega?`Entrega: ${c.entrega}`:""].filter(Boolean).join("\n");
+    const msg=[`${quien} · ${euros(c.total ?? total+(c.gastos_envio||0))}${c.codigo_promo?` · código ${c.codigo_promo} (−${euros(c.descuento)})`:""}${c.gastos_envio?` (envío ${euros(c.gastos_envio)})`:c.entrega==="Envío"?" (envío gratis)":""}${c.pago?` · ${c.pago}`:""}`, ...lineas, c.instagram?`Instagram: @${c.instagram}`:"", c.entrega?`Entrega: ${c.entrega}`:""].filter(Boolean).join("\n");
     fetch("https://ntfy.sh/", {method:"POST", keepalive:true, body:JSON.stringify({
       topic:NTFY_TEMA, title:`Nuevo pedido ${ref}`, message:msg, tags:["package"], priority:4
     })}).catch(()=>{});
@@ -1484,13 +1345,14 @@ async function enviar(e){
     marca(/^\d{5}$/.test(c.cp), "fCP","eCP");
     marca(c.poblacion, "fPob","ePob");
   }
-  marca($("#fAcepto").checked, "fAcepto","eAcepto");
   if(fallos.length){ $("#"+fallos[0]).focus(); $("#"+fallos[0]).scrollIntoView({behavior:"smooth", block:"center"}); return; }
   c.direccion = c.entrega==="Envío" ? [c.calle, c.piso, `${c.cp} ${c.poblacion}`].filter(Boolean).join(", ") : "";
   const subtotalPedido = cesta.reduce((s,it)=>s+(+it.precio||0),0);
-  c.gastos_envio = gastosEnvio(subtotalPedido, c.entrega);
-  c.total = subtotalPedido + c.gastos_envio;
-  cliente={...c}; delete cliente.notas; delete cliente.gastos_envio; delete cliente.total; store.set("nvr_cliente", cliente);
+  c.descuento = descuentoDe(cesta, codigoPromo);
+  c.codigo_promo = c.descuento ? codigoPromo : "";
+  c.gastos_envio = gastosEnvio(subtotalPedido - c.descuento, c.entrega);
+  c.total = Math.round((subtotalPedido - c.descuento + c.gastos_envio)*100)/100;
+  cliente={...c}; delete cliente.notas; delete cliente.gastos_envio; delete cliente.total; delete cliente.descuento; delete cliente.codigo_promo; store.set("nvr_cliente", cliente);
   const piezas=cesta.slice();
   const btn=$("#enviar"); btn.disabled=true; btn.textContent="Enviando tu pedido…"; $("#eEnvio").classList.remove("show");
   let numero=null;
@@ -1503,7 +1365,7 @@ async function enviar(e){
     $("#eEnvio").classList.add("show");
     return;
   }
-  cesta=[]; guardarCesta();
+  cesta=[]; guardarCesta(); codigoPromo=""; store.set("nvr_promo","");
   const total=piezas.filter(it=>it.precio!=null).reduce((s,it)=>s+it.precio,0);
   const consultar=piezas.some(it=>it.precio==null);
   $("#cartBody").innerHTML=`
@@ -1512,18 +1374,19 @@ async function enviar(e){
       <h3>¡Pedido realizado!</h3>
       <p class="n-pedido">Pedido nº <b>${esc(String(numero))}</b></p>
       <p>¡Gracias! Me pondré en contacto contigo lo antes posible para confirmarte el diseño${c.pago==="Efectivo"?" y el pago en efectivo":""}.</p>
-      ${c.pago==="Bizum"?`<div class="bizum">Haz un Bizum de <b>${euros(total+(c.gastos_envio||0))}</b> al
+      ${c.pago==="Bizum"?`<div class="bizum">Haz un Bizum de <b>${euros(c.total ?? total+(c.gastos_envio||0))}</b> al
         <b class="n">${TEL_BIZUM_TXT}</b>
         con el concepto <b>${esc(String(numero))}</b>.
         <div class="acciones"><button class="pill soft" type="button" id="copiarBizum">Copiar número</button></div></div>`:""}
-      <a class="pill wa block" id="enviarWa" target="_blank" rel="noopener" href="https://wa.me/34${TEL_BIZUM}?text=${encodeURIComponent(`Hola! Acabo de hacer el pedido ${numero} en la web de NVR Studio. Importe total: ${euros(total+(c.gastos_envio||0))}${c.pago==="Bizum"?" (pago por Bizum)":""}.`)}">Enviar mi pedido por WhatsApp</a>
+      <a class="pill wa block" id="enviarWa" target="_blank" rel="noopener" href="https://wa.me/34${TEL_BIZUM}?text=${encodeURIComponent(`Hola! Acabo de hacer el pedido ${numero} en la web de NVR Studio. Importe total: ${euros(c.total ?? total+(c.gastos_envio||0))}${c.pago==="Bizum"?" (pago por Bizum)":""}.`)}">Enviar mi pedido por WhatsApp</a>
       ${piezas.some(i=>i.foto)?`<p>Con tu foto prepararé el diseño y te lo enviaré por Instagram${c.instagram?` a <b>@${esc(c.instagram)}</b>`:""} para que lo apruebes.</p>`:""}
       <p class="small">Guarda tu número de pedido por si necesitas consultarlo.</p>
     </div>
     <div class="resumen-pedido">
       ${piezas.map(it=>`<div class="rp-item"><span><b>${esc(it.producto)}</b>${it.detalles?`<br><small>${esc(it.detalles)}</small>`:""}</span><span>${it.precio!=null?euros(it.precio):"A confirmar"}</span></div>`).join("")}
+      ${c.descuento?`<div class="rp-item"><span>Descuento ${esc(c.codigo_promo)}</span><span>−${euros(c.descuento)}</span></div>`:""}
       ${c.entrega==="Envío"?`<div class="rp-item"><span>Envío</span><span>${c.gastos_envio?euros(c.gastos_envio):"Gratis"}</span></div>`:""}
-      <div class="rp-item rp-total"><span>Total</span><span>${euros(total+(c.gastos_envio||0))}</span></div>
+      <div class="rp-item rp-total"><span>Total</span><span>${euros(c.total ?? total+(c.gastos_envio||0))}</span></div>
       <p class="small">${c.entrega==="Envío"?`Envío a ${esc(c.direccion)}`:"Recogida en Terrassa"}</p>
     </div>
     <button class="pill soft block" type="button" id="cerrarFin">Volver a la tienda</button>`;
@@ -1538,13 +1401,6 @@ ajustarCabecera(); addEventListener('resize', ajustarCabecera);
 pintarProductos();
 pintarColores();
 vigilarSecciones();
-/* Las fotos aparecen con un fundido suave al cargar, en vez de de golpe */
-document.querySelectorAll(".rail img, .gp img").forEach(img => {
-  if(img.complete && img.naturalWidth) img.classList.add("cargada");
-  else { const ok = () => img.classList.add("cargada"); img.addEventListener("load", ok, {once:true}); img.addEventListener("error", ok, {once:true}); }
-});
-/* Al tocar el nombre, el cuenco se gira para enseñar la placa */
-$("#texto").addEventListener("focus", () => { if(c3d && eleccion && eleccion.prod.id==="cuencos" && c3d.mirandoDeLado()) c3d.verDeFrente(); });
 guardarCesta();
 </script>
 <button class="arriba" type="button" id="arriba" aria-label="Volver al inicio de la página" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
