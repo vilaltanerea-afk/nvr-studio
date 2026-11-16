@@ -527,6 +527,7 @@
   @media(max-width:520px){ .promo-banner .pb-fin{display:block; opacity:.85; font-size:12px;} .promo-banner .pb-largo{display:none;} .promo-banner{font-size:13px; padding:8px 12px;} }
   .t-desc{color:#1a7f37 !important; font-weight:600;}
   .t-desc[hidden]{display:none;}
+  .t-desc span:last-child, .t-linea span:last-child{white-space:nowrap; padding-left:12px;}
   .promo{display:flex; flex-direction:column; gap:6px;}
   .promo-row{display:flex; gap:8px;}
   .promo-row input{flex:1; min-width:0; text-transform:uppercase; letter-spacing:.04em;}
@@ -870,7 +871,7 @@ const PRODUCTOS = [
    pista:"Otras observaciones: si es un regalo, para cuándo lo necesitas…"},
   {id:"lightbox", nombre:"Lightbox personalizado", corto:"Lightbox", precio:35, tag:"Nuevo",
    desc:"Un cuadro con luz con la ilustración de tu mascota, o de quien tú quieras, creada a partir de tu foto.",
-   imgs:fotos("lightbox",6), color:false, texto:null, colorTexto:false, foto:true,
+   imgs:fotos("lightbox",9), color:false, texto:null, colorTexto:false, foto:true,
    opciones:[
      {titulo:"Luz", pregunta:"¿Con luz LED incorporada?", valores:[{t:"Con luz LED incorporada", s:"40 €", precio:40},{t:"Sin luz LED", s:"35 €", precio:35}]},
    ],
@@ -1445,7 +1446,7 @@ function pintarTotales(entrega){
   const desc=descuentoDe(cesta, codigoPromo);
   const sub=(+box.dataset.sub||0)-desc, env=gastosEnvio(sub, entrega);
   $("#tDesc").hidden = !desc;
-  if(desc){ $("#tDesc span:first-child").textContent=`Descuento ${codigoPromo} (${PROMOS[codigoPromo].pct}% cuencos)`; $("#tDesc span:last-child").textContent="−"+euros(desc); }
+  if(desc){ $("#tDesc span:first-child").textContent=`Descuento ${codigoPromo} (−${PROMOS[codigoPromo].pct}%)`; $("#tDesc span:last-child").textContent="−"+euros(desc); }
   const msg=$("#promoMsg");
   if(msg && codigoPromo && !desc) msg.textContent="Este código solo se aplica a los cuencos. Añade un cuenco para usarlo.";
   $("#tEnvio").hidden = entrega!=="Envío";
