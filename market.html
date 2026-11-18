@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#6c0720">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Stock market">
+<title>Stock del market · Ndeocaki × NVR Studio</title>
+<link rel="icon" href="imagenes/favicon.png">
+<link rel="apple-touch-icon" href="imagenes/icono.png">
+<style>
+  :root{
+    --bg:#f6f3f4; --card:#fff; --ink:#1d1d1f; --ink-2:#6e6e73; --line:rgba(0,0,0,.08);
+    --hilo:#6c0720; --verde:#1a7f37; --naranja:#c2410c; --rojo:#b3261e;
+    --ndeo:#2f6f5e; --nvr:#6c0720; --otros:#5b5b66;
+    --sys:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sys); -webkit-text-size-adjust:100%;}
+  button, input, select, textarea{font:inherit; color:inherit;}
+  button{cursor:pointer;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 16px;}
+
+  header{position:sticky; top:0; z-index:20; background:rgba(246,243,244,.92); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px); border-bottom:1px solid var(--line); padding-top:env(safe-area-inset-top);}
+  .barra{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0 10px;}
+  .barra h1{font-size:19px; margin:0; letter-spacing:-.01em;}
+  .barra h1 small{display:block; font-size:12px; font-weight:500; color:var(--ink-2); letter-spacing:0;}
+  .estado{font-size:12px; color:var(--ink-2); display:flex; align-items:center; gap:6px; white-space:nowrap;}
+  .estado i{width:8px; height:8px; border-radius:50%; background:var(--verde); display:inline-block;}
+  .estado.off i{background:var(--rojo);}
+  .chips{display:flex; gap:8px; overflow-x:auto; padding:0 0 12px; scrollbar-width:none;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{border:1px solid var(--line); background:#fff; border-radius:999px; padding:8px 14px; font-size:14px; white-space:nowrap;}
+  .chip[aria-pressed="true"]{background:var(--ink); color:#fff; border-color:var(--ink);}
+
+  .resumen{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 0;}
+  .tile{background:var(--card); border-radius:16px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,.04);}
+  .tile b{display:block; font-size:22px; letter-spacing:-.02em; margin-top:4px;}
+  .tile span{font-size:12px; color:var(--ink-2);}
+  .marcas{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:6px;}
+  .marca-t{background:var(--card); border-radius:14px; padding:10px 12px; font-size:13px; border-left:4px solid var(--c);}
+  .marca-t b{display:block; font-size:16px;}
+
+  .buscar{width:100%; border:1px solid var(--line); background:#fff; border-radius:12px; padding:12px 14px; font-size:16px; margin:8px 0 4px;}
+  h2{font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-2); margin:22px 4px 8px; display:flex; justify-content:space-between;}
+  .lista{display:flex; flex-direction:column; gap:10px;}
+  .prod{background:var(--card); border-radius:16px; padding:14px; display:grid; grid-template-columns:1fr auto; gap:10px 12px; align-items:center; box-shadow:0 1px 2px rgba(0,0,0,.04); border-left:4px solid var(--c);}
+  .prod .info{min-width:0; cursor:pointer;}
+  .prod .n{font-weight:600; font-size:16px; line-height:1.25;}
+  .prod .m{font-size:12.5px; color:var(--ink-2); margin-top:3px;}
+  .prod .quedan{font-size:14px; margin-top:6px;}
+  .prod .quedan b{font-size:18px;}
+  .prod.bajo .quedan b{color:var(--naranja);}
+  .prod.agotado{opacity:.6;}
+  .prod.agotado .quedan b{color:var(--rojo);}
+  .barra-s{grid-column:1 / -1; height:6px; background:#eee; border-radius:6px; overflow:hidden;}
+  .barra-s i{display:block; height:100%; background:var(--c); border-radius:6px; transition:width .3s ease;}
+  .acc{display:flex; align-items:center; gap:8px;}
+  .menos{width:44px; height:44px; border-radius:12px; border:1px solid var(--line); background:#fff; font-size:22px; line-height:1;}
+  .vender{height:44px; padding:0 16px; border:0; border-radius:12px; background:var(--ink); color:#fff; font-weight:600; font-size:15px; white-space:nowrap;}
+  .vender:active, .menos:active{transform:scale(.96);}
+  .vender:disabled{background:#c7c7cc;}
+
+  .botones{display:flex; flex-wrap:wrap; gap:10px; margin:24px 0;}
+  .btn{border:1px solid var(--line); background:#fff; border-radius:12px; padding:12px 16px; font-size:15px; font-weight:500;}
+  .btn.pri{background:var(--hilo); color:#fff; border-color:var(--hilo);}
+  .btn.peligro{color:var(--rojo);}
+
+  .ventas{background:var(--card); border-radius:16px; padding:6px 14px; margin-bottom:40px;}
+  .venta{display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--line); font-size:14px;}
+  .venta:last-child{border-bottom:0;}
+  .venta small{color:var(--ink-2); display:block; font-size:12px;}
+  .venta .neg{color:var(--rojo);}
+  .vacio{color:var(--ink-2); text-align:center; padding:18px; font-size:14px;}
+
+  .velo{position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:50; display:none; align-items:flex-end; justify-content:center;}
+  .velo.open{display:flex;}
+  .hoja{background:#fff; width:100%; max-width:560px; border-radius:20px 20px 0 0; padding:20px 18px calc(20px + env(safe-area-inset-bottom)); max-height:92vh; overflow:auto; animation:sube .22s ease;}
+  @keyframes sube{from{transform:translateY(30px); opacity:.6}}
+  @media(min-width:700px){ .velo{align-items:center;} .hoja{border-radius:20px;} }
+  .hoja h3{margin:0 0 14px; font-size:20px;}
+  .campo{display:flex; flex-direction:column; gap:6px; margin-bottom:14px;}
+  .campo label{font-size:13px; font-weight:600; color:var(--ink-2);}
+  .campo input, .campo select, .campo textarea{border:1px solid #d2d2d7; border-radius:12px; padding:12px 14px; font-size:16px; background:#fff; width:100%;}
+  .dos{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .hoja .botones{margin:8px 0 0;}
+  .err{color:var(--rojo); font-size:14px; min-height:1em;}
+  .toast{position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom)); transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; padding:12px 18px; border-radius:999px; font-size:14px; opacity:0; transition:.25s; z-index:60; pointer-events:none; max-width:90vw;}
+  .toast.show{opacity:1; transform:translateX(-50%);}
+  .entrar{max-width:380px; margin:18vh auto 0; background:#fff; border-radius:20px; padding:26px; text-align:center;}
+  .entrar img{height:46px; margin-bottom:10px;}
+  .entrar p{color:var(--ink-2); font-size:14px;}
+</style>
+</head>
+<body>
+
+<div id="pantallaEntrar" class="wrap" hidden>
+  <form class="entrar" id="formEntrar">
+    <img src="imagenes/logo.png" alt="NVR Studio">
+    <h3 style="margin:6px 0 4px">Stock del market</h3>
+    <p>Solo para nosotras. Escribe la clave y tu nombre (para saber quién apunta cada venta).</p>
+    <div class="campo"><input id="inClave" placeholder="Clave" autocomplete="off" autocapitalize="none" required></div>
+    <div class="campo"><input id="inQuien" placeholder="Tu nombre (ej. Nerea)" required></div>
+    <div class="err" id="errEntrar"></div>
+    <button class="btn pri" style="width:100%" type="submit">Entrar</button>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <header>
+    <div class="wrap">
+      <div class="barra">
+        <h1>Stock del market <small>Ndeocaki × NVR Studio</small></h1>
+        <span class="estado" id="estado"><i></i><span>Al día</span></span>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filtrar por marca"></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="resumen">
+      <div class="tile"><span>Vendido</span><b id="rEuros">0 €</b></div>
+      <div class="tile"><span>Vendidas</span><b id="rUds">0</b></div>
+      <div class="tile"><span>Quedan</span><b id="rQuedan">0</b></div>
+    </section>
+    <section class="marcas" id="porMarca"></section>
+
+    <input class="buscar" id="buscar" type="search" placeholder="Buscar producto…">
+    <div id="listas"></div>
+
+    <div class="botones">
+      <button class="btn pri" type="button" id="btnNuevo">+ Añadir producto</button>
+      <button class="btn" type="button" id="btnCsv">Descargar Excel (CSV)</button>
+      <button class="btn peligro" type="button" id="btnReiniciar">Poner ventas a cero</button>
+    </div>
+
+    <h2>Últimos movimientos</h2>
+    <div class="ventas" id="ventas"></div>
+    <p class="vacio" style="padding-top:0">Conectada como <b id="quienSoy"></b> · <button class="btn" style="padding:4px 10px;font-size:13px" id="btnSalir" type="button">Cambiar</button></p>
+  </main>
+</div>
+
+<div class="velo" id="velo" aria-hidden="true">
+  <form class="hoja" id="formProd" novalidate>
+    <h3 id="tituloForm">Nuevo producto</h3>
+    <div class="campo"><label for="fNombre">Producto</label><input id="fNombre" required placeholder="Ej. Bolsa de tela estampada"></div>
+    <div class="campo"><label for="fMarca">Marca</label>
+      <select id="fMarca"><option>Ndeocaki</option><option>NVR Studio</option><option>Otros</option></select></div>
+    <div class="dos">
+      <div class="campo"><label for="fPrecio">Precio (€)</label><input id="fPrecio" inputmode="decimal" placeholder="15"></div>
+      <div class="campo"><label for="fInicial">Unidades que llevamos</label><input id="fInicial" inputmode="numeric" placeholder="0"></div>
+    </div>
+    <div class="campo"><label for="fNota">Nota</label><input id="fNota" placeholder="Colores, tallas… (opcional)"></div>
+    <div class="campo" id="infoVendidos" hidden></div>
+    <div class="err" id="errForm"></div>
+    <div class="botones">
+      <button class="btn pri" type="submit" id="btnGuardar">Guardar</button>
+      <button class="btn" type="button" id="btnCancelar">Cancelar</button>
+      <button class="btn peligro" type="button" id="btnBorrar" hidden>Borrar</button>
+    </div>
+  </form>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const SUPABASE_URL = "https://lvugkubtqggbueievrcd.supabase.co";
+const SUPABASE_KEY = "sb_publishable_xgOOygHz3Owo4TUvY_Mw1Q_TaoQRYJz";
+const MARCAS = [["Ndeocaki","var(--ndeo)"],["NVR Studio","var(--nvr)"],["Otros","var(--otros)"]];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const euros = n => { n = +n || 0; return (Number.isInteger(n) ? n : n.toFixed(2).replace(".", ",")) + " €"; };
+const colorDe = m => (MARCAS.find(x => x[0] === m) || MARCAS[2])[1];
+const guardado = { get:k=>{ try{return localStorage.getItem(k)||""}catch(e){return ""} }, set:(k,v)=>{ try{localStorage.setItem(k,v)}catch(e){} } };
+
+let clave = guardado.get("mk_clave"), quien = guardado.get("mk_quien");
+let productos = [], ventas = [], filtro = guardado.get("mk_filtro") || "Todas", editando = null;
+let pendientes = 0;
+
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove("show"), 2200); }
+function estado(ok, txt){ $("#estado").classList.toggle("off", !ok); $("#estado span").textContent = txt || (ok ? "Al día" : "Sin conexión"); }
+
+async function rpc(fn, args){
+  const h = {"Content-Type":"application/json", "apikey":SUPABASE_KEY};
+  if(SUPABASE_KEY.startsWith("eyJ")) h.Authorization = "Bearer " + SUPABASE_KEY;
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, {method:"POST", headers:h, body:JSON.stringify({clave, ...args})});
+  const txt = await r.text();
+  if(!r.ok){ const e = new Error(txt.includes("clave incorrecta") ? "clave" : "HTTP " + r.status); throw e; }
+  return txt ? JSON.parse(txt) : null;
+}
+
+/* ===== Entrar ===== */
+$("#formEntrar").addEventListener("submit", async e => {
+  e.preventDefault();
+  clave = $("#inClave").value.trim(); quien = $("#inQuien").value.trim();
+  $("#errEntrar").textContent = "";
+  try{ await cargar(true); guardado.set("mk_clave", clave); guardado.set("mk_quien", quien); mostrarApp(); }
+  catch(err){ $("#errEntrar").textContent = err.message === "clave" ? "Clave incorrecta." : "No se ha podido conectar. Revisa internet."; }
+});
+$("#btnSalir").addEventListener("click", () => { guardado.set("mk_quien",""); quien=""; $("#app").hidden=true; $("#pantallaEntrar").hidden=false; $("#inClave").value=clave; $("#inQuien").focus(); });
+function mostrarApp(){ $("#pantallaEntrar").hidden = true; $("#app").hidden = false; $("#quienSoy").textContent = quien; pintar(); }
+
+/* ===== Datos ===== */
+async function cargar(lanzar){
+  try{
+    const d = await rpc("market_listar", {});
+    if(pendientes === 0){ productos = d.productos || []; ventas = d.ventas || []; }
+    estado(true);
+    if(!$("#app").hidden) pintar();
+  }catch(err){
+    estado(false, err.message === "clave" ? "Clave incorrecta" : "Sin conexión");
+    if(lanzar) throw err;
+  }
+}
+
+function quedan(p){ return Math.max(0, (p.inicial||0) - (p.vendidos||0)); }
+
+function pintar(){
+  // chips
+  const opciones = ["Todas", ...MARCAS.map(m => m[0])];
+  $("#chips").innerHTML = opciones.map(o => `<button class="chip" type="button" data-f="${esc(o)}" aria-pressed="${o===filtro}">${esc(o)}</button>`).join("");
+  // resumen (según filtro)
+  const vis = productos.filter(p => filtro === "Todas" || p.marca === filtro);
+  const vendE = vis.reduce((s,p)=>s + (p.vendidos||0) * (+p.precio||0), 0);
+  $("#rEuros").textContent = euros(vendE);
+  $("#rUds").textContent = vis.reduce((s,p)=>s + (p.vendidos||0), 0);
+  $("#rQuedan").textContent = vis.reduce((s,p)=>s + quedan(p), 0);
+  $("#porMarca").innerHTML = MARCAS.map(([m,c]) => {
+    const ps = productos.filter(p => p.marca === m);
+    const e = ps.reduce((s,p)=>s + (p.vendidos||0) * (+p.precio||0), 0);
+    return `<div class="marca-t" style="--c:${c}">${esc(m)}<b>${euros(e)}</b><span style="color:var(--ink-2);font-size:12px">${ps.reduce((s,p)=>s+(p.vendidos||0),0)} vendidos</span></div>`;
+  }).join("");
+  // listas
+  const q = $("#buscar").value.trim().toLowerCase();
+  const grupos = MARCAS.filter(([m]) => filtro === "Todas" || m === filtro).map(([m,c]) => {
+    const ps = productos.filter(p => p.marca === m && (!q || (p.nombre + " " + p.nota).toLowerCase().includes(q)))
+      .sort((a,b) => (quedan(a)===0) - (quedan(b)===0) || a.nombre.localeCompare(b.nombre, "es"));
+    if(!ps.length && (q || filtro === "Todas")) return "";
+    return `<h2><span>${esc(m)}</span><span>${ps.length} ${ps.length===1?"producto":"productos"}</span></h2>
+      <div class="lista">${ps.length ? ps.map(p => fila(p, c)).join("") : `<div class="vacio">Aún no hay productos. Pulsa «+ Añadir producto».</div>`}</div>`;
+  }).join("");
+  $("#listas").innerHTML = grupos || `<div class="vacio">No hay productos que coincidan.</div>`;
+  // ventas
+  $("#ventas").innerHTML = ventas.length ? ventas.slice(0, 40).map(v => {
+    const t = new Date(v.momento);
+    const hora = t.toLocaleTimeString("es-ES", {hour:"2-digit", minute:"2-digit"});
+    const dia = t.toLocaleDateString("es-ES", {day:"numeric", month:"short"});
+    return `<div class="venta"><span>${v.cantidad<0?'<span class="neg">Deshecho</span> · ':""}${esc(v.nombre)}<small>${esc(v.marca)} · ${dia} ${hora}${v.quien?` · ${esc(v.quien)}`:""}</small></span><span class="${v.cantidad<0?"neg":""}">${v.cantidad>0?"+":""}${v.cantidad} · ${euros(v.cantidad*(+v.precio||0))}</span></div>`;
+  }).join("") : `<div class="vacio">Todavía no hay ventas apuntadas.</div>`;
+}
+
+function fila(p, c){
+  const qd = quedan(p), ini = p.inicial || 0;
+  const cls = qd === 0 && ini > 0 ? "agotado" : (qd <= 1 && ini > 0 ? "bajo" : "");
+  const pct = ini ? Math.min(100, (p.vendidos||0) / ini * 100) : 0;
+  return `<div class="prod ${cls}" style="--c:${c}">
+    <div class="info" data-editar="${p.id}">
+      <div class="n">${esc(p.nombre)}</div>
+      <div class="m">${p.precio!=null?euros(p.precio):"Sin precio"}${p.nota?` · ${esc(p.nota)}`:""}</div>
+      <div class="quedan">${ini ? (qd===0?`<b>Agotado</b>`:`Quedan <b>${qd}</b> de ${ini}`) : `<span style="color:var(--ink-2)">Toca para poner el stock</span>`} · ${p.vendidos||0} vendidos</div>
+    </div>
+    <div class="acc">
+      <button class="menos" type="button" data-menos="${p.id}" aria-label="Deshacer una venta de ${esc(p.nombre)}" ${p.vendidos?"":"disabled"}>−</button>
+      <button class="vender" type="button" data-vender="${p.id}" ${ini && qd===0?"disabled":""}>Vendido +1</button>
+    </div>
+    <div class="barra-s"><i style="width:${pct}%"></i></div>
+  </div>`;
+}
+
+/* ===== Acciones ===== */
+document.addEventListener("click", async e => {
+  const f = e.target.closest("[data-f]");
+  if(f){ filtro = f.dataset.f; guardado.set("mk_filtro", filtro); pintar(); return; }
+  const v = e.target.closest("[data-vender]"), m = e.target.closest("[data-menos]");
+  if(v || m){
+    const id = (v||m).dataset.vender || (v||m).dataset.menos, delta = v ? 1 : -1;
+    const p = productos.find(x => x.id === id); if(!p) return;
+    p.vendidos = Math.max(0, (p.vendidos||0) + delta);
+    ventas.unshift({nombre:p.nombre, marca:p.marca, cantidad:delta, precio:p.precio, quien, momento:new Date().toISOString()});
+    pintar(); if(navigator.vibrate) navigator.vibrate(15);
+    toast(delta > 0 ? `${p.nombre}: vendido ✓` : `${p.nombre}: venta deshecha`);
+    pendientes++;
+    try{ await rpc("market_vender", {pid:id, cantidad:delta, quien}); }
+    catch(err){ toast("No se ha guardado. Revisa la conexión y vuelve a pulsar."); }
+    finally{ pendientes--; cargar(); }
+    return;
+  }
+  const ed = e.target.closest("[data-editar]");
+  if(ed){ abrirForm(productos.find(x => x.id === ed.dataset.editar)); }
+});
+$("#buscar").addEventListener("input", pintar);
+$("#btnNuevo").addEventListener("click", () => abrirForm(null));
+$("#btnCancelar").addEventListener("click", cerrarForm);
+$("#velo").addEventListener("click", e => { if(e.target.id === "velo") cerrarForm(); });
+
+function abrirForm(p){
+  editando = p;
+  $("#tituloForm").textContent = p ? "Editar producto" : "Nuevo producto";
+  $("#fNombre").value = p ? p.nombre : "";
+  $("#fMarca").value = p ? p.marca : (filtro !== "Todas" ? filtro : "Ndeocaki");
+  $("#fPrecio").value = p && p.precio!=null ? String(p.precio).replace(".", ",") : "";
+  $("#fInicial").value = p ? (p.inicial||0) : "";
+  $("#fNota").value = p ? (p.nota||"") : "";
+  $("#btnBorrar").hidden = !p;
+  $("#infoVendidos").hidden = !p;
+  if(p) $("#infoVendidos").innerHTML = `<label>Vendidos hasta ahora</label><div>${p.vendidos||0} (quedan ${quedan(p)})</div>`;
+  $("#errForm").textContent = "";
+  $("#velo").classList.add("open"); $("#velo").setAttribute("aria-hidden","false");
+  setTimeout(() => $("#fNombre").focus(), 50);
+}
+function cerrarForm(){ $("#velo").classList.remove("open"); $("#velo").setAttribute("aria-hidden","true"); editando = null; }
+
+$("#formProd").addEventListener("submit", async e => {
+  e.preventDefault();
+  const nombre = $("#fNombre").value.trim();
+  if(!nombre){ $("#errForm").textContent = "Escribe el nombre del producto."; return; }
+  const precioTxt = $("#fPrecio").value.trim().replace(",", ".");
+  if(precioTxt && isNaN(+precioTxt)){ $("#errForm").textContent = "El precio tiene que ser un número."; return; }
+  const ini = parseInt($("#fInicial").value, 10);
+  const p = {id: editando ? editando.id : "", nombre, marca:$("#fMarca").value, precio: precioTxt, inicial: isNaN(ini) ? 0 : ini, nota: $("#fNota").value.trim()};
+  $("#btnGuardar").disabled = true;
+  try{ await rpc("market_guardar", {p}); cerrarForm(); toast("Guardado"); await cargar(); }
+  catch(err){ $("#errForm").textContent = "No se ha podido guardar. Revisa la conexión."; }
+  finally{ $("#btnGuardar").disabled = false; }
+});
+$("#btnBorrar").addEventListener("click", async () => {
+  if(!editando || !confirm(`¿Borrar «${editando.nombre}»? Se borran también sus ventas.`)) return;
+  try{ await rpc("market_borrar", {pid: editando.id}); cerrarForm(); toast("Borrado"); await cargar(); }
+  catch(err){ $("#errForm").textContent = "No se ha podido borrar."; }
+});
+$("#btnReiniciar").addEventListener("click", async () => {
+  if(!confirm("¿Poner todas las ventas a cero? El stock que llevamos se mantiene, pero se borran las ventas y el historial. Útil antes de otro market.")) return;
+  try{ await rpc("market_reiniciar", {}); toast("Ventas a cero"); await cargar(); }
+  catch(err){ toast("No se ha podido reiniciar."); }
+});
+$("#btnCsv").addEventListener("click", () => {
+  const filas = [["Marca","Producto","Precio","Llevamos","Vendidos","Quedan","Vendido (€)","Nota"]];
+  productos.forEach(p => filas.push([p.marca, p.nombre, p.precio ?? "", p.inicial||0, p.vendidos||0, quedan(p), ((p.vendidos||0)*(+p.precio||0)).toFixed(2), p.nota||""]));
+  const csv = "﻿" + filas.map(f => f.map(x => `"${String(x).replace(/"/g,'""')}"`).join(";")).join("\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8"}));
+  a.download = `stock-market-${new Date().toISOString().slice(0,10)}.csv`; a.click();
+});
+
+/* ===== Actualizar solo (para ver lo que apunta la otra) ===== */
+setInterval(() => { if(!document.hidden && clave && !$("#app").hidden && !$("#velo").classList.contains("open")) cargar(); }, 4000);
+document.addEventListener("visibilitychange", () => { if(!document.hidden && clave) cargar(); });
+addEventListener("online", () => cargar());
+addEventListener("offline", () => estado(false));
+
+/* ===== Inicio ===== */
+if(clave && quien){ mostrarApp(); cargar(); }
+else { $("#pantallaEntrar").hidden = false; if(clave) $("#inClave").value = clave; }
+</script>
+</body>
+</html>
